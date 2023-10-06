@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: fanao
+Build-Jdk: 17.0.6
+Implementation-Title: jeeProject
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.jeeproject
+Main-Class: ${start-class}
+
