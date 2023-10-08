@@ -1,17 +1,25 @@
-package com.jeeproject.jeeProject.model;
+package com.jeeproject.jeeProject.models;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
 public class Session {
     private String codeSession;
     private Date date;
     private String heureDebut;
     private String heureFin;
+    @ManyToOne
     private Discipline discipline;
-    private String epreuve; 
+    private String epreuve;
+    @OneToOne
     private Site siteCompetition;
     private String description;
     private String typeSession;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     // Constructeur par défaut
     public Session() {
@@ -112,5 +120,13 @@ public class Session {
                 ", heureFin=" + heureFin + ", discipline=" + discipline + ", epreuve=" + epreuve +
                 ", siteCompetition=" + siteCompetition + ", description=" + description +
                 ", typeSession=" + typeSession + "]";
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

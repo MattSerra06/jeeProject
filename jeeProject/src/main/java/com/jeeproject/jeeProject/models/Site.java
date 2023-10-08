@@ -1,12 +1,29 @@
-package com.jeeproject.jeeProject.model;
+package com.jeeproject.jeeProject.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Site {
     private String nom;
     private String ville;
     private CategorieSite categorie;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     // Enumération pour les catégories de site
-    public enum CategorieSite {
+    public enum CategorieSite {//class à part
         STADE, SALLE_DE_SPECTACLE, LIEU_PUBLIC, CENTRE_AQUATIQUE
     }
 
