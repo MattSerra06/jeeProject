@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface SiteRepository extends CrudRepository<Site,Long> {
 
-    boolean existsByNomAndVilleAndCategorie(String nom, String ville, Site.CategorieSite categorie);
+    boolean existsByNomAndVilleAndCategorie(String nom, String ville, Site.CategorieSite category);
 
 
 }

@@ -1,15 +1,12 @@
 package com.jeeproject.jeeProject.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Site {
     private String nom;
     private String ville;
-    private CategorieSite categorie;
+    private CategorieSite category;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -32,10 +29,10 @@ public class Site {
     }
 
     // Constructeur avec paramètres
-    public Site(String nom, String ville, CategorieSite categorie) {
+    public Site(String nom, String ville, CategorieSite category) {
         this.nom = nom;
         this.ville = ville;
-        this.categorie = categorie;
+        this.category = category;
     }
 
     // Méthodes getters et setters pour accéder aux attributs
@@ -55,17 +52,17 @@ public class Site {
         this.ville = ville;
     }
 
-    public CategorieSite getCategorie() {
-        return categorie;
+    public CategorieSite getCategory() {
+        return category;
     }
 
-    public void setCategorie(CategorieSite categorie) {
-        this.categorie = categorie;
+    public void setCategory(CategorieSite category) {
+        this.category = category;
     }
 
     // Méthode toString pour afficher les informations du site
     @Override
     public String toString() {
-        return "Site [nom=" + nom + ", ville=" + ville + ", categorie=" + categorie + "]";
+        return "Site [nom=" + nom + ", ville=" + ville + ", categorie=" + category + "]";
     }
 }
