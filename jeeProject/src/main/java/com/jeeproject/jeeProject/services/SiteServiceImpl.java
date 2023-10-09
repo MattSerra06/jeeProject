@@ -20,19 +20,25 @@ public class SiteServiceImpl implements SiteService {
         return siteRepository.findAll();
     }
 
-    public void createSite(SiteResource siteResource) throws IOException {
+    public SiteResource createSite(SiteResource siteResource) throws IOException {
         Site site = siteMapper.siteResourceToSite(siteResource);
         if(!estEnDB(siteResource)){
             siteRepository.save(site);
         }else{
             throw new IOException("Site déjà présent en DB");
         }
+        return siteMapper.siteToSiteResource(site);
     }
 
-    public void updateSite(SiteResource siteResource,Long id){
+    public SiteResource updateSite(SiteResource siteResource,Long id){
         Site site = siteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Site not found with id :"+id));
         siteMapper.updateSiteFromResource(siteResource,site);
         siteRepository.save(site);
+        return siteMapper.siteToSiteResource(site);
+    }
+
+    public void deleteSite(Long id){
+        siteRepository.deleteById(id);
     }
 
     private boolean estEnDB(SiteResource siteResource){

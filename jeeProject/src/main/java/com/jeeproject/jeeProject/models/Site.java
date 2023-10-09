@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Site {
     private String nom;
     private String ville;
-    private CategorieSite category;
+    private CategorieSite categorie;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -32,7 +32,7 @@ public class Site {
     public Site(String nom, String ville, CategorieSite category) {
         this.nom = nom;
         this.ville = ville;
-        this.category = category;
+        this.categorie = category;
     }
 
     // Méthodes getters et setters pour accéder aux attributs
@@ -52,17 +52,17 @@ public class Site {
         this.ville = ville;
     }
 
-    public CategorieSite getCategory() {
-        return category;
+    public CategorieSite getCategorie() {
+        return categorie;
     }
 
-    public void setCategory(CategorieSite category) {
-        this.category = category;
+    public void setCategorie(CategorieSite category) {
+        this.categorie = category;
     }
 
     // Méthode toString pour afficher les informations du site
     @Override
     public String toString() {
-        return "Site [nom=" + nom + ", ville=" + ville + ", categorie=" + category + "]";
+        return "Site [nom=" + nom + ", ville=" + ville + ", categorie=" + categorie + "]";
     }
 }

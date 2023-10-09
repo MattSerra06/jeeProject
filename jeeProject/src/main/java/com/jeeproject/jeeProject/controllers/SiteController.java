@@ -24,24 +24,34 @@ public class SiteController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createSite(@RequestBody SiteResource siteResource){
+    public ResponseEntity<Object> createSite(@RequestBody SiteResource siteResource){
         try {
-            siteServiceImpl.createSite(siteResource);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Site créé avec succès.");
+            SiteResource createdSiteResource = siteServiceImpl.createSite(siteResource);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdSiteResource);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSite(@PathVariable("id") Long id,@RequestBody SiteResource siteResource){
+    public ResponseEntity<Object> updateSite(@PathVariable("id") Long id,@RequestBody SiteResource siteResource){
         try{
-            siteServiceImpl.updateSite(siteResource,id);
-            return ResponseEntity.ok("Site mit à jour");
+            SiteResource updatedSiteResource = siteServiceImpl.updateSite(siteResource,id);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedSiteResource);
         }catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSite(@PathVariable("id") Long id){
+        try{
+            siteServiceImpl.deleteSite(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Ssite avec l'id :"+id+" supprimé");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Site avec l'id :"+id+" introuvable");
         }
     }
 
