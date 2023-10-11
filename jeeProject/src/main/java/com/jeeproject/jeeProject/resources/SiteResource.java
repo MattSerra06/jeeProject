@@ -8,6 +8,9 @@ public class SiteResource {
     private Site.CategorieSite categorie;
     private Long id;
 
+    public SiteResource() {
+    }
+
     public SiteResource(String nom, String ville, Site.CategorieSite categorie, Long id) {
         this.nom = nom;
         this.ville = ville;
