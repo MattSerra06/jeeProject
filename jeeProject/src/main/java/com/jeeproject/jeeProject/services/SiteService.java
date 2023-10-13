@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public interface SiteService {
     public Iterable<Site> getSites();
+
     public SiteResource createSite(SiteResource siteResource) throws IOException;
 
     public SiteResource updateSite(SiteResource siteResource, Long id);
