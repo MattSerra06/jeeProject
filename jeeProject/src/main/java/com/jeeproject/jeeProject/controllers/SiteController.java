@@ -23,6 +23,11 @@ public class SiteController {
         return siteServiceImpl.getSites();
     }
 
+    @GetMapping("/{id}")
+    public SiteResource getSite(@PathVariable Long id){
+        return siteServiceImpl.getSite(id);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Object> createSite(@RequestBody SiteResource siteResource){
         try {
