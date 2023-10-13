@@ -54,7 +54,7 @@ public class SiteController {
     public ResponseEntity<Object> deleteSite(@PathVariable("id") Long id){
         try{
             siteServiceImpl.deleteSite(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Ssite avec l'id :"+id+" supprimé");
+            return ResponseEntity.status(HttpStatus.OK).body("Site avec l'id :"+id+" supprimé");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Site avec l'id :"+id+" introuvable");
         }
