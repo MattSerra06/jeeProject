@@ -8,4 +8,8 @@ public interface SessionService {
     public SessionResource getSession(Long id);
 
     public SessionResource createSession(SessionResource sessionResource) throws IOException;
+
+    public SessionResource updateSession(SessionResource sessionResource,Long id);
+
+    public void deleteSession(Long id);
 }

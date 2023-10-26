@@ -32,6 +32,21 @@ public class SessionServiceImpl implements SessionService{
             throw new IOException("Site déjà présent en DB");
         }
     }
+
+    @Override
+    public SessionResource updateSession(SessionResource sessionResource,Long id) {
+        Session session = sessionRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No session found in db with the id :"+id));
+        sessionMapper.updateSessionFromResource(sessionResource,session);
+        sessionRepository.save(session);
+        return sessionMapper.sessionToSessionResource(session);
+    }
+
+    @Override
+    public void deleteSession(Long id) {
+        sessionRepository.deleteById(id);
+    }
+
+
     public boolean estEnDB(SessionResource sessionResource) {
         return sessionRepository.existsByCodeSessionAndDateAndHeureDebutAndHeureFinAndDisciplineAndEpreuveAndSiteCompetitionAndDescriptionAndTypeSession(
                 sessionResource.getCodeSession(), sessionResource.getDate(), sessionResource.getHeureDebut(), sessionResource.getHeureFin(),

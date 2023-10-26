@@ -16,22 +16,37 @@ public class SessionController {
     private SessionServiceImpl sessionServiceImpl;
 
     @GetMapping("/{id}")
-    public SessionResource getSession(@PathVariable Long id){
+    public SessionResource getSession(@PathVariable Long id) {
         return sessionServiceImpl.getSession(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createSession(@RequestBody SessionResource sessionResource){
+    public ResponseEntity<Object> createSession(@RequestBody SessionResource sessionResource) {
         try {
             SessionResource resource = sessionServiceImpl.createSession(sessionResource);
             return ResponseEntity.status(HttpStatus.CREATED).body(resource);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateSession(@RequestBody SessionResource sessionResource){
-        return null;
+    public ResponseEntity<Object> updateSession(@RequestBody SessionResource sessionResource, @PathVariable Long id) {
+        try {
+            SessionResource resource = sessionServiceImpl.updateSession(sessionResource, id);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSession(@PathVariable Long id) {
+        try {
+            sessionServiceImpl.deleteSession(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Session avec l'id :" + id + " supprimé");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Session avec l'id :"+id+" introuvable");
+        }
     }
 }
