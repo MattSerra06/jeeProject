@@ -30,7 +30,6 @@ public class SiteController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Object> createSite(@RequestBody SiteResource siteResource){
         try {
             SiteResource createdSiteResource = siteServiceImpl.createSite(siteResource);

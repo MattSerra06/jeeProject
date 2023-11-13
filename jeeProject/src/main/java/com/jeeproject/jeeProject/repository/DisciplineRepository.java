@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface DisciplineRepository extends CrudRepository<Discipline,Long> {
     
     boolean existsByNomAndEstParalympique(String nom, boolean estParalympique);
-    
+
+    Discipline findByNom(String nom);
 }

@@ -1,8 +1,10 @@
 package com.jeeproject.jeeProject.services;
 
 import com.jeeproject.jeeProject.mappers.SessionMapper;
+import com.jeeproject.jeeProject.repository.DisciplineRepository;
 import com.jeeproject.jeeProject.repository.SessionRepository;
 import com.jeeproject.jeeProject.models.Session;
+import com.jeeproject.jeeProject.repository.SiteRepository;
 import com.jeeproject.jeeProject.resources.SessionResource;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ public class SessionServiceImpl implements SessionService{
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private DisciplineRepository disciplineRepository;
+    @Autowired
+    private SiteRepository siteRepository;
     @Autowired
     private SessionMapper sessionMapper;
 
@@ -26,7 +32,8 @@ public class SessionServiceImpl implements SessionService{
     public SessionResource createSession(SessionResource sessionResource) throws IOException {
         if(!estEnDB(sessionResource)){
             Session session = sessionMapper.sessionResourceToSession(sessionResource);
-            session.setDiscipline(sessionRepository.);
+            session.setDiscipline(disciplineRepository.findByNom(sessionResource.getDisciplineName()));
+            session.setSiteCompetition(siteRepository.findByNom(sessionResource.getSiteName()));
             sessionRepository.save(session);
             return sessionMapper.sessionToSessionResource(session);
         }else{
@@ -51,7 +58,7 @@ public class SessionServiceImpl implements SessionService{
     public boolean estEnDB(SessionResource sessionResource) {
         return sessionRepository.existsByCodeSessionAndDateAndHeureDebutAndHeureFinAndDisciplineAndEpreuveAndSiteCompetitionAndDescriptionAndTypeSession(
                 sessionResource.getCodeSession(), sessionResource.getDate(), sessionResource.getHeureDebut(), sessionResource.getHeureFin(),
-                sessionResource.getDiscipline(), sessionResource.getEpreuve(), sessionResource.getSiteCompetition(), sessionResource.getDescription(),
+                disciplineRepository.findByNom(sessionResource.getDisciplineName()), sessionResource.getEpreuve(), siteRepository.findByNom(sessionResource.getSiteName()), sessionResource.getDescription(),
                 sessionResource.getTypeSession()
         );
     }
