@@ -11,9 +11,9 @@ public class SessionResource {
     private Date date;
     private String heureDebut;
     private String heureFin;
-    private Discipline discipline;
+    private String disciplineName;
     private String epreuve;
-    private Site siteCompetition;
+    private String siteName;
     private String description;
     private String typeSession;
     private Long id;
@@ -21,17 +21,33 @@ public class SessionResource {
     public SessionResource() {
     }
 
-    public SessionResource(String codeSession, Date date, String heureDebut, String heureFin, Discipline discipline, String epreuve, Site siteCompetition, String description, String typeSession, Long id) {
+    public SessionResource(String codeSession, Date date, String heureDebut, String heureFin, String disciplineName, String epreuve, String siteName, String description, String typeSession, Long id) {
         this.codeSession = codeSession;
         this.date = date;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
-        this.discipline = discipline;
+        this.disciplineName = disciplineName;
         this.epreuve = epreuve;
-        this.siteCompetition = siteCompetition;
+        this.siteName = siteName;
         this.description = description;
         this.typeSession = typeSession;
         this.id = id;
+    }
+
+    public String getDisciplineName() {
+        return disciplineName;
+    }
+
+    public void setDisciplineName(String disciplineName) {
+        this.disciplineName = disciplineName;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
     }
 
     public String getCodeSession() {
@@ -66,14 +82,6 @@ public class SessionResource {
         this.heureFin = heureFin;
     }
 
-    public Discipline getDiscipline() {
-        return discipline;
-    }
-
-    public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
-    }
-
     public String getEpreuve() {
         return epreuve;
     }
@@ -82,13 +90,6 @@ public class SessionResource {
         this.epreuve = epreuve;
     }
 
-    public Site getSiteCompetition() {
-        return siteCompetition;
-    }
-
-    public void setSiteCompetition(Site siteCompetition) {
-        this.siteCompetition = siteCompetition;
-    }
 
     public String getDescription() {
         return description;

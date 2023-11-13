@@ -26,6 +26,7 @@ public class SessionServiceImpl implements SessionService{
     public SessionResource createSession(SessionResource sessionResource) throws IOException {
         if(!estEnDB(sessionResource)){
             Session session = sessionMapper.sessionResourceToSession(sessionResource);
+            session.setDiscipline(sessionRepository.);
             sessionRepository.save(session);
             return sessionMapper.sessionToSessionResource(session);
         }else{

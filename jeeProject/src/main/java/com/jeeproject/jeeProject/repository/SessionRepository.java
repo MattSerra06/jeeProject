@@ -13,4 +13,6 @@ public interface SessionRepository extends CrudRepository<Session, Long> {
             Site siteCompetition, String description, String typeSession
     );
 
+
+
 }

@@ -13,9 +13,13 @@ import org.mapstruct.MappingTarget;
 @Mapper(config = MapperConfig.class)
 public interface SessionMapper {
 
+    @Mapping(target = "discipline",ignore = true)
+    @Mapping(target = "siteCompetition",ignore = true)
     SessionResource sessionToSessionResource(Session session);
 
     @Mapping(target="id",ignore=true)
+    @Mapping(target = "disciplineName",ignore = true)
+    @Mapping(target = "siteName",ignore = true)
     Session sessionResourceToSession(SessionResource sessionResource);
 
     void updateSessionFromResource(SessionResource sessionResource, @MappingTarget Session session);
