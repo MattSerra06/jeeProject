@@ -5,8 +5,9 @@ import com.jeeproject.jeeProject.services.EpreuveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/epreuve")
@@ -14,6 +15,11 @@ public class EpreuveController {
 
     @Autowired
     private EpreuveServiceImpl epreuveServiceImpl;
+
+    @GetMapping
+    public Iterable<EpreuveResource> getEpreuves(){
+        return epreuveServiceImpl.getEpreuves();
+    }
 
     @GetMapping("/{id}")
     public EpreuveResource getEpreuve(@PathVariable Long id){return epreuveServiceImpl.getEpreuve(id);}

@@ -1,6 +1,7 @@
 package com.jeeproject.jeeProject.services;
 
 import com.jeeproject.jeeProject.mappers.SessionMapper;
+import com.jeeproject.jeeProject.models.Epreuve;
 import com.jeeproject.jeeProject.repository.DisciplineRepository;
 import com.jeeproject.jeeProject.repository.SessionRepository;
 import com.jeeproject.jeeProject.models.Session;
@@ -10,6 +11,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class SessionServiceImpl implements SessionService{
     @Autowired
@@ -26,6 +29,14 @@ public class SessionServiceImpl implements SessionService{
     public SessionResource getSession(Long id) {
         Session session = sessionRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No session found in db with the id :"+id));
         return sessionMapper.sessionToSessionResource(session);
+    }
+
+    @Override
+    public Iterable<SessionResource> getSessions(){
+        Iterable<Session> sessions = sessionRepository.findAll();
+        return StreamSupport.stream(sessions.spliterator(), false)
+                .map(sessionMapper::sessionToSessionResource)
+                .collect(Collectors.toList());
     }
 
     @Override

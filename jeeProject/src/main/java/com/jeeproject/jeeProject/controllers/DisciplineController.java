@@ -16,7 +16,12 @@ public class DisciplineController {
     private DisciplineServiceImpl disciplineServiceImpl;
 
     @GetMapping
-    public Iterable<Discipline> getDisciplines(){return disciplineServiceImpl.getDisciplines();}
+    public Iterable<DisciplineResource> getDisciplines(){return disciplineServiceImpl.getDisciplines();}
+
+    @GetMapping("/{id}")
+    public DisciplineResource getDiscipline(@PathVariable Long id){
+        return disciplineServiceImpl.getDiscipline(id);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Object> createDiscipline(@RequestBody DisciplineResource disciplineResource){

@@ -5,6 +5,8 @@ import com.jeeproject.jeeProject.resources.SessionResource;
 import java.io.IOException;
 
 public interface SessionService {
+
+    public Iterable<SessionResource> getSessions();
     public SessionResource getSession(Long id);
 
     public SessionResource createSession(SessionResource sessionResource) throws IOException;

@@ -2,7 +2,11 @@ package com.jeeproject.jeeProject.services;
 
 import com.jeeproject.jeeProject.resources.EpreuveResource;
 
+import java.util.List;
+
 public interface EpreuveService {
+
+    public Iterable<EpreuveResource> getEpreuves();
 
     public EpreuveResource getEpreuve(Long id);
 

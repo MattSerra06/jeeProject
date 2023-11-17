@@ -15,6 +15,11 @@ public class SessionController {
     @Autowired
     private SessionServiceImpl sessionServiceImpl;
 
+    @GetMapping
+    public Iterable<SessionResource> getSessions(){
+        return sessionServiceImpl.getSessions();
+    }
+
     @GetMapping("/{id}")
     public SessionResource getSession(@PathVariable Long id) {
         return sessionServiceImpl.getSession(id);

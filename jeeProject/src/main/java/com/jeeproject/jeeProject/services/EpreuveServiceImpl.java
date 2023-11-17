@@ -8,6 +8,10 @@ import com.jeeproject.jeeProject.resources.EpreuveResource;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 public class EpreuveServiceImpl implements EpreuveService{
 
     @Autowired
@@ -16,6 +20,14 @@ public class EpreuveServiceImpl implements EpreuveService{
     private DisciplineRepository disciplineRepository;
     @Autowired
     private EpreuveMapper epreuveMapper;
+
+    @Override
+    public Iterable<EpreuveResource> getEpreuves(){
+        Iterable<Epreuve> epreuves = epreuveRepository.findAll();
+        return StreamSupport.stream(epreuves.spliterator(), false)
+                .map(epreuveMapper::epreuveToEpreuveResource)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public EpreuveResource getEpreuve(Long id) {

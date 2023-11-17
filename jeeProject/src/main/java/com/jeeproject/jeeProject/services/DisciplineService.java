@@ -6,7 +6,9 @@ import com.jeeproject.jeeProject.resources.DisciplineResource;
 import java.io.IOException;
 
 public interface DisciplineService {
-    public Iterable<Discipline> getDisciplines();
+    public Iterable<DisciplineResource> getDisciplines();
+
+    public DisciplineResource getDiscipline(Long id);
 
     public DisciplineResource createDiscipline(DisciplineResource disciplineResource) throws IOException;
 
