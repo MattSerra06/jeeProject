@@ -1,6 +1,7 @@
 package com.jeeproject.jeeProject.services;
 
 import com.jeeproject.jeeProject.mappers.EpreuveMapper;
+import com.jeeproject.jeeProject.models.Discipline;
 import com.jeeproject.jeeProject.models.Epreuve;
 import com.jeeproject.jeeProject.repository.DisciplineRepository;
 import com.jeeproject.jeeProject.repository.EpreuveRepository;
@@ -8,7 +9,6 @@ import com.jeeproject.jeeProject.resources.EpreuveResource;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -61,7 +61,15 @@ public class EpreuveServiceImpl implements EpreuveService{
         epreuveRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<EpreuveResource> getAllEpreuvesByDiscipline(){
+        Iterable<Epreuve> epreuves = epreuveRepository.findAllEpreuvesOrderByDiscipline();
+        return StreamSupport.stream(epreuves.spliterator(), false)
+                .map(epreuveMapper::epreuveToEpreuveResource)
+                .collect(Collectors.toList());
+    }
+
     public boolean estEnDB(EpreuveResource epreuveResource){
-        return epreuveRepository.existByNomAndDiscipline(epreuveResource.getNom(),disciplineRepository.findByNom(epreuveResource.getDisciplineNom()));
+        return epreuveRepository.existsByNomAndDiscipline(epreuveResource.getNom(),disciplineRepository.findByNom(epreuveResource.getDisciplineNom()));
     }
 }

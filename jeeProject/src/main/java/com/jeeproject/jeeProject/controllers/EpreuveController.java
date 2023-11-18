@@ -54,4 +54,15 @@ public class EpreuveController {
 
         }
     }
+
+    @GetMapping("/disciplines")
+    public ResponseEntity<Object> getAllEpreuveByDiscipline(){
+        try {
+            Iterable<EpreuveResource> epreuveResources = epreuveServiceImpl.getAllEpreuvesByDiscipline();
+            System.out.println(epreuveResources);
+            return ResponseEntity.status(HttpStatus.OK).body(epreuveResources);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Aucune épreuve trouvé pour les disciplines");
+        }
+    }
 }
