@@ -15,11 +15,13 @@ public interface SessionMapper {
 
     @Mapping(target = "disciplineName",source="discipline.nom")
     @Mapping(target = "siteName",source="siteCompetition.nom")
+    @Mapping(target = "epreuveName", source="epreuve.nom")
     SessionResource sessionToSessionResource(Session session);
 
     @Mapping(target="id",ignore=true)
     @Mapping(target = "discipline",ignore = true)
     @Mapping(target = "siteCompetition",ignore = true)
+    @Mapping(target = "epreuve",ignore = true)
     Session sessionResourceToSession(SessionResource sessionResource);
 
     void updateSessionFromResource(SessionResource sessionResource, @MappingTarget Session session);

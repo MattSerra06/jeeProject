@@ -1,8 +1,8 @@
 package com.jeeproject.jeeProject.services;
 
 import com.jeeproject.jeeProject.mappers.SessionMapper;
-import com.jeeproject.jeeProject.models.Epreuve;
 import com.jeeproject.jeeProject.repository.DisciplineRepository;
+import com.jeeproject.jeeProject.repository.EpreuveRepository;
 import com.jeeproject.jeeProject.repository.SessionRepository;
 import com.jeeproject.jeeProject.models.Session;
 import com.jeeproject.jeeProject.repository.SiteRepository;
@@ -17,7 +17,8 @@ import java.util.stream.StreamSupport;
 public class SessionServiceImpl implements SessionService{
     @Autowired
     private SessionRepository sessionRepository;
-
+    @Autowired
+    private EpreuveRepository epreuveRepository;
     @Autowired
     private DisciplineRepository disciplineRepository;
     @Autowired
@@ -45,6 +46,7 @@ public class SessionServiceImpl implements SessionService{
             Session session = sessionMapper.sessionResourceToSession(sessionResource);
             session.setDiscipline(disciplineRepository.findByNom(sessionResource.getDisciplineName()));
             session.setSiteCompetition(siteRepository.findByNom(sessionResource.getSiteName()));
+            session.setEpreuve(epreuveRepository.findByNom(sessionResource.getEpreuveName()));
             sessionRepository.save(session);
             return sessionMapper.sessionToSessionResource(session);
         }else{
@@ -69,7 +71,7 @@ public class SessionServiceImpl implements SessionService{
     public boolean estEnDB(SessionResource sessionResource) {
         return sessionRepository.existsByCodeSessionAndDateAndHeureDebutAndHeureFinAndDisciplineAndEpreuveAndSiteCompetitionAndDescriptionAndTypeSession(
                 sessionResource.getCodeSession(), sessionResource.getDate(), sessionResource.getHeureDebut(), sessionResource.getHeureFin(),
-                disciplineRepository.findByNom(sessionResource.getDisciplineName()), sessionResource.getEpreuve(), siteRepository.findByNom(sessionResource.getSiteName()), sessionResource.getDescription(),
+                disciplineRepository.findByNom(sessionResource.getDisciplineName()),epreuveRepository.findByNom(sessionResource.getEpreuveName()), siteRepository.findByNom(sessionResource.getSiteName()), sessionResource.getDescription(),
                 sessionResource.getTypeSession()
         );
     }

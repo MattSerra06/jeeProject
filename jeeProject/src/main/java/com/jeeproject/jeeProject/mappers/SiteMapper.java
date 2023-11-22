@@ -12,6 +12,6 @@ public interface SiteMapper {
 
     @Mapping(target="id",ignore=true)
     Site siteResourceToSite(SiteResource siteResource);
-
+    @Mapping(target="id",ignore=true)
     void updateSiteFromResource(SiteResource siteResource, @MappingTarget Site site);
 }

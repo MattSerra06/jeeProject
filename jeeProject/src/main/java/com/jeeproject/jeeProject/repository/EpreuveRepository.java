@@ -9,4 +9,6 @@ public interface EpreuveRepository extends CrudRepository<Epreuve,Long> {
     boolean existsByNomAndDiscipline(String nom, Discipline discipline);
     @Query("SELECT e FROM Epreuve e JOIN e.discipline d ORDER BY d.nom")
     Iterable<Epreuve> findAllEpreuvesOrderByDiscipline();
+
+    Epreuve findByNom(String nom);
 }

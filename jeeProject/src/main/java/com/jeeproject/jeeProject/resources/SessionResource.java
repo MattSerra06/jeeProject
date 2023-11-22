@@ -1,9 +1,5 @@
 package com.jeeproject.jeeProject.resources;
 
-import com.jeeproject.jeeProject.models.Discipline;
-import com.jeeproject.jeeProject.models.Site;
-import jakarta.persistence.*;
-
 import java.util.Date;
 
 public class SessionResource {
@@ -12,7 +8,7 @@ public class SessionResource {
     private String heureDebut;
     private String heureFin;
     private String disciplineName;
-    private String epreuve;
+    private String epreuveName;
     private String siteName;
     private String description;
     private String typeSession;
@@ -21,13 +17,13 @@ public class SessionResource {
     public SessionResource() {
     }
 
-    public SessionResource(String codeSession, Date date, String heureDebut, String heureFin, String disciplineName, String epreuve, String siteName, String description, String typeSession, Long id) {
+    public SessionResource(String codeSession, Date date, String heureDebut, String heureFin, String disciplineName, String epreuveName, String siteName, String description, String typeSession, Long id) {
         this.codeSession = codeSession;
         this.date = date;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
         this.disciplineName = disciplineName;
-        this.epreuve = epreuve;
+        this.epreuveName = epreuveName;
         this.siteName = siteName;
         this.description = description;
         this.typeSession = typeSession;
@@ -82,12 +78,12 @@ public class SessionResource {
         this.heureFin = heureFin;
     }
 
-    public String getEpreuve() {
-        return epreuve;
+    public String getEpreuveName() {
+        return epreuveName;
     }
 
-    public void setEpreuve(String epreuve) {
-        this.epreuve = epreuve;
+    public void setEpreuveName(String epreuveName) {
+        this.epreuveName = epreuveName;
     }
 
 

@@ -6,14 +6,16 @@ import java.util.Date;
 
 @Entity
 public class Session {
+    @Column(unique = true)
     private String codeSession;
     private Date date;
     private String heureDebut;
     private String heureFin;
     @ManyToOne
     private Discipline discipline;
-    private String epreuve;
-    @OneToOne
+    @ManyToOne
+    private Epreuve epreuve;
+    @ManyToOne
     private Site siteCompetition;
     private String description;
     private String typeSession;
@@ -27,7 +29,7 @@ public class Session {
 
     // Constructeur avec paramètres
     public Session(String codeSession, Date date, String heureDebut, String heureFin,
-                   Discipline discipline, String epreuve, Site siteCompetition,
+                   Discipline discipline, Epreuve epreuve, Site siteCompetition,
                    String description, String typeSession) {
         this.codeSession = codeSession;
         this.date = date;
@@ -81,11 +83,11 @@ public class Session {
         this.discipline = discipline;
     }
 
-    public String getEpreuve() {
+    public Epreuve getEpreuve() {
         return epreuve;
     }
 
-    public void setEpreuve(String epreuve) {
+    public void setEpreuve(Epreuve epreuve) {
         this.epreuve = epreuve;
     }
 
