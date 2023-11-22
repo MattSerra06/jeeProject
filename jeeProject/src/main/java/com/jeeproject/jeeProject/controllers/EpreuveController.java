@@ -1,5 +1,6 @@
 package com.jeeproject.jeeProject.controllers;
 
+import com.jeeproject.jeeProject.resources.DisciplineResource;
 import com.jeeproject.jeeProject.resources.EpreuveResource;
 import com.jeeproject.jeeProject.services.EpreuveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,20 @@ public class EpreuveController {
     public ResponseEntity<Object> getAllEpreuveByDiscipline(){
         try {
             Iterable<EpreuveResource> epreuveResources = epreuveServiceImpl.getAllEpreuvesByDiscipline();
-            System.out.println(epreuveResources);
             return ResponseEntity.status(HttpStatus.OK).body(epreuveResources);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Aucune épreuve trouvé pour les disciplines");
+        }
+    }
+
+    @GetMapping("/discipline/{disciplineName}")
+    public ResponseEntity<Object> getEpreuveByDiscipline(@PathVariable String disciplineName){
+        try{
+            Iterable<EpreuveResource> epreuveResources = epreuveServiceImpl.getEpreuvesByDiscipline(disciplineName);
+            return ResponseEntity.status(HttpStatus.OK).body(epreuveResources);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Aucune épreuve trouvé pour la discipline selectionné");
+
         }
     }
 }

@@ -68,7 +68,12 @@ public class EpreuveServiceImpl implements EpreuveService{
                 .map(epreuveMapper::epreuveToEpreuveResource)
                 .collect(Collectors.toList());
     }
-
+    public Iterable<EpreuveResource> getEpreuvesByDiscipline(String disciplineName){
+        Iterable<Epreuve> epreuves = epreuveRepository.findEpreuvesByDisciplineNom(disciplineName);
+        return StreamSupport.stream(epreuves.spliterator(), false)
+                .map(epreuveMapper::epreuveToEpreuveResource)
+                .collect(Collectors.toList());
+    }
     public boolean estEnDB(EpreuveResource epreuveResource){
         return epreuveRepository.existsByNomAndDiscipline(epreuveResource.getNom(),disciplineRepository.findByNom(epreuveResource.getDisciplineNom()));
     }

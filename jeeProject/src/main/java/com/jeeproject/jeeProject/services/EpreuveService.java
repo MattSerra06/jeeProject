@@ -16,4 +16,6 @@ public interface EpreuveService {
     public EpreuveResource updateEpreuve(EpreuveResource epreuveResource,Long id);
 
     public void deleteEpreuve(Long id);
+
+    public Iterable<EpreuveResource> getEpreuvesByDiscipline(String disciplineName);
 }
