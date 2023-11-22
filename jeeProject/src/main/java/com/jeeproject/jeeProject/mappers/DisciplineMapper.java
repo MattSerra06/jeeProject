@@ -12,6 +12,6 @@ public interface DisciplineMapper {
 
     @Mapping(target="id",ignore=true)
     Discipline disciplineResourceToDiscipline(DisciplineResource disciplineResource);
-
+    @Mapping(target="id",ignore=true)
     void updateDisciplineFromResource(DisciplineResource disciplineResource, @MappingTarget Discipline discipline);
 }

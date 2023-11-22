@@ -23,7 +23,7 @@ public interface SessionMapper {
     @Mapping(target = "siteCompetition",ignore = true)
     @Mapping(target = "epreuve",ignore = true)
     Session sessionResourceToSession(SessionResource sessionResource);
-
+    @Mapping(target="id",ignore=true)
     void updateSessionFromResource(SessionResource sessionResource, @MappingTarget Session session);
 
 }

@@ -16,6 +16,6 @@ public interface EpreuveMapper {
     @Mapping(target="id",ignore=true)
     @Mapping(target = "discipline",ignore = true)
     Epreuve epreuveResourceToEpreuve(EpreuveResource epreuveResource);
-
+    @Mapping(target="id",ignore=true)
     void updateEpreuveFromResource(EpreuveResource epreuveResource, @MappingTarget Epreuve epreuve);
 }
