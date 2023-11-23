@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,5 +21,7 @@ public interface SessionRepository extends CrudRepository<Session, Long> {
 
     @Query("SELECT s.siteCompetition, COUNT(s) as sessionCount FROM Session s GROUP BY s.siteCompetition ORDER BY sessionCount DESC")
     List<Object[]> findTop5SitesBySessionCount();
+
+    boolean existsByDisciplineAndDateAndHeureDebutAndHeureFin(Discipline discipline,Date date,String heureDebut,String heureFin);
 
 }
