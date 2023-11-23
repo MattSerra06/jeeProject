@@ -20,4 +20,7 @@ public class RestAppConfig {
     @Bean
     public EpreuveServiceImpl epreuveService(){return new EpreuveServiceImpl();}
 
+    @Bean
+    public StatistiqueServiceImpl statistiqueService(){return new StatistiqueServiceImpl();}
+
 }
