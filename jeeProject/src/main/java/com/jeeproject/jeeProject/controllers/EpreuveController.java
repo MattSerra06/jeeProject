@@ -1,6 +1,6 @@
 package com.jeeproject.jeeProject.controllers;
 
-import com.jeeproject.jeeProject.resources.DisciplineResource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.jeeproject.jeeProject.resources.EpreuveResource;
 import com.jeeproject.jeeProject.services.EpreuveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,7 @@ public class EpreuveController {
     public EpreuveResource getEpreuve(@PathVariable Long id){return epreuveServiceImpl.getEpreuve(id);}
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> createEpreuve(@RequestBody EpreuveResource epreuveResource){
         try{
             EpreuveResource resource = epreuveServiceImpl.createEpreuve(epreuveResource);
@@ -36,6 +37,7 @@ public class EpreuveController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> updateEpreuve(@RequestBody EpreuveResource epreuveResource, @PathVariable Long id){
         try{
             EpreuveResource resource = epreuveServiceImpl.updateEpreuve(epreuveResource,id);
@@ -46,6 +48,7 @@ public class EpreuveController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> deleteEpreuve(@PathVariable Long id){
         try {
             epreuveServiceImpl.deleteEpreuve(id);

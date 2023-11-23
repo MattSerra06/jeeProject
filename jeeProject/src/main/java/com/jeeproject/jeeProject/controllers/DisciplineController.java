@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +25,7 @@ public class DisciplineController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> createDiscipline(@RequestBody DisciplineResource disciplineResource){
         try{
             DisciplineResource createdDisciplineResource = disciplineServiceImpl.createDiscipline(disciplineResource);
@@ -34,6 +36,7 @@ public class DisciplineController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> updateDiscipline(@PathVariable("id") Long id,@RequestBody DisciplineResource disciplineResource){
         try{
             DisciplineResource updatedDisciplineResource = disciplineServiceImpl.updateDiscipline(disciplineResource,id);
@@ -46,6 +49,7 @@ public class DisciplineController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> deleteDiscipline(@PathVariable("id") Long id){
         try{
             disciplineServiceImpl.deleteDiscipline(id);

@@ -25,11 +25,13 @@ public class SiteController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public SiteResource getSite(@PathVariable Long id){
         return siteServiceImpl.getSite(id);
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> createSite(@RequestBody SiteResource siteResource){
         try {
             SiteResource createdSiteResource = siteServiceImpl.createSite(siteResource);
@@ -40,6 +42,7 @@ public class SiteController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> updateSite(@PathVariable("id") Long id,@RequestBody SiteResource siteResource){
         try{
             SiteResource updatedSiteResource = siteServiceImpl.updateSite(siteResource,id);
@@ -52,6 +55,7 @@ public class SiteController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINISTRATIVE_MANAGER')")
     public ResponseEntity<Object> deleteSite(@PathVariable("id") Long id){
         try{
             siteServiceImpl.deleteSite(id);

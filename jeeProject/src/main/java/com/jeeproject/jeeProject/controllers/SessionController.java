@@ -6,6 +6,7 @@ import com.jeeproject.jeeProject.services.SessionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class SessionController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SESSION_MANAGER')")
     public ResponseEntity<Object> createSession(@RequestBody SessionResource sessionResource) {
         try {
             SessionResource resource = sessionServiceImpl.createSession(sessionResource);
@@ -36,6 +38,7 @@ public class SessionController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SESSION_MANAGER')")
     public ResponseEntity<Object> updateSession(@RequestBody SessionResource sessionResource, @PathVariable Long id) {
         try {
             SessionResource resource = sessionServiceImpl.updateSession(sessionResource, id);
@@ -46,6 +49,7 @@ public class SessionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SESSION_MANAGER')")
     public ResponseEntity<Object> deleteSession(@PathVariable Long id) {
         try {
             sessionServiceImpl.deleteSession(id);
