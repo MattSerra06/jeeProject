@@ -15,17 +15,20 @@ public class SiteServiceImpl implements SiteService {
     private SiteRepository siteRepository;
     @Autowired
     private SiteMapper siteMapper;
-
     public Iterable<Site> getSites(){//Faut transformer ça en SiteResource à renvoyer
         return siteRepository.findAll();
     }
-
     @Override
     public SiteResource getSite(Long id) {
         Site site = siteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Site not found in db with id :"+id));
         return siteMapper.siteToSiteResource(site);
     }
-
+    public SiteResource updateSite(SiteResource siteResource,Long id){
+        Site site = siteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Site not found in db with id :"+id));
+        siteMapper.updateSiteFromResource(siteResource,site);
+        siteRepository.save(site);
+        return siteMapper.siteToSiteResource(site);
+    }
     public SiteResource createSite(SiteResource siteResource) throws IOException {
         Site site = siteMapper.siteResourceToSite(siteResource);
         if(!estEnDB(siteResource)){
@@ -36,12 +39,6 @@ public class SiteServiceImpl implements SiteService {
         return siteMapper.siteToSiteResource(site);
     }
 
-    public SiteResource updateSite(SiteResource siteResource,Long id){
-        Site site = siteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Site not found in db with id :"+id));
-        siteMapper.updateSiteFromResource(siteResource,site);
-        siteRepository.save(site);
-        return siteMapper.siteToSiteResource(site);
-    }
 
     public void deleteSite(Long id){
         siteRepository.deleteById(id);
