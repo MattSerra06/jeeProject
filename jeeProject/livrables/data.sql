@@ -4,7 +4,7 @@ drop table discipline;
 drop table site;
 -- Création de la table discipline avec id en auto-incrément
 CREATE TABLE discipline (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     est_paralympique BOOLEAN,
     nom VARCHAR(255)
 );
@@ -25,9 +25,9 @@ INSERT INTO discipline (est_paralympique, nom) VALUES (false, 'Waterpolo');
 
 -- Création de la table epreuve avec une clé étrangère discipline_id
 CREATE TABLE epreuve (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255),
-    discipline_id INT,
+    discipline_id BIGINT,
     FOREIGN KEY (discipline_id) REFERENCES discipline(id)
 );
 
@@ -95,8 +95,8 @@ INSERT INTO epreuve (nom, discipline_id) VALUES ('Tournoi', (SELECT id FROM disc
 
 
 CREATE TABLE site (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    categorie INT,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    categorie BIGINT,
     nom VARCHAR(255),
     ville VARCHAR(255));
 
@@ -128,37 +128,18 @@ INSERT INTO site (categorie, nom, ville) VALUES (3, 'Centre Aquatique du Lac', '
 INSERT INTO site (categorie, nom, ville) VALUES (3, 'Piscine de la Confluence', 'Lyon');
 
 
--- Insertion de données fictives pour la table session
 -- Création de la table session
 CREATE TABLE session (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     code_session VARCHAR(5),
     date DATE,
     description VARCHAR(255),
     heure_debut TIME,
     heure_fin TIME,
     type_session VARCHAR(255),
-    discipline_id INT,
-    site_competition_id INT,
-    epreuve_id INT,
-    CONSTRAINT fk_discipline FOREIGN KEY (discipline_id) REFERENCES discipline(id),
-    CONSTRAINT fk_site FOREIGN KEY (site_competition_id) REFERENCES site(id),
-    CONSTRAINT fk_epreuve FOREIGN KEY (epreuve_id) REFERENCES epreuve(id),
-    CONSTRAINT uc_code_session UNIQUE (code_session)
-);
-
--- Création de la table session
-CREATE TABLE session (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    code_session VARCHAR(5),
-    date DATE,
-    description VARCHAR(255),
-    heure_debut TIME,
-    heure_fin TIME,
-    type_session VARCHAR(255),
-    discipline_id INT,
-    site_competition_id INT,
-    epreuve_id INT,
+    discipline_id BIGINT,
+    site_competition_id BIGINT,
+    epreuve_id BIGINT,
     CONSTRAINT fk_discipline FOREIGN KEY (discipline_id) REFERENCES discipline(id),
     CONSTRAINT fk_site FOREIGN KEY (site_competition_id) REFERENCES site(id),
     CONSTRAINT fk_epreuve FOREIGN KEY (epreuve_id) REFERENCES epreuve(id),
